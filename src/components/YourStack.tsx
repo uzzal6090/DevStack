@@ -2,7 +2,7 @@ import type { Technology } from "../types/technology";
 
 interface YourStackProps {
   selectedTechnologies: Technology[];
-  onRemove: (id: number) => void;
+  onRemove: (id: string) => void;
   onRemoveAll: () => void;
 }
 
@@ -23,9 +23,9 @@ function YourStack({
         lg:top-24
       "
     >
-      {/* ================= HEADER ================= */}
-      <div className="flex items-center justify-between gap-3">
+      {/* Header */}
 
+      <div className="flex items-center justify-between gap-3">
         <h2 className="text-xl font-bold text-gray-900">
           Your Stack
         </h2>
@@ -46,11 +46,10 @@ function YourStack({
         </span>
       </div>
 
-      {/* ================= EMPTY STATE ================= */}
+      {/* Empty State */}
+
       {selectedTechnologies.length === 0 ? (
         <div className="text-center py-12">
-
-          {/* Empty Icon */}
           <div
             className="
               w-14
@@ -75,13 +74,12 @@ function YourStack({
           <p className="text-sm text-gray-400 mt-2 leading-5">
             Add technologies from the list to build your stack.
           </p>
-
         </div>
       ) : (
         <>
-          {/* ================= SELECTED TECHNOLOGIES ================= */}
-          <div className="mt-5 space-y-3">
+          {/* Selected Technologies */}
 
+          <div className="mt-5 space-y-3">
             {selectedTechnologies.map((technology) => (
               <div
                 key={technology.id}
@@ -98,10 +96,11 @@ function YourStack({
                   transition
                 "
               >
-                {/* Technology Information */}
-                <div className="flex items-center gap-3 min-w-0">
+                {/* Technology Info */}
 
+                <div className="flex items-center gap-3 min-w-0">
                   {/* Icon */}
+
                   <div
                     className="
                       w-10
@@ -123,8 +122,8 @@ function YourStack({
                   </div>
 
                   {/* Name + Category */}
-                  <div className="min-w-0">
 
+                  <div className="min-w-0">
                     <h3 className="font-semibold text-sm text-gray-900 truncate">
                       {technology.name}
                     </h3>
@@ -132,11 +131,11 @@ function YourStack({
                     <p className="text-xs text-gray-500 mt-0.5">
                       {technology.category}
                     </p>
-
                   </div>
                 </div>
 
-                {/* Remove */}
+                {/* Remove Button */}
+
                 <button
                   type="button"
                   onClick={() => onRemove(technology.id)}
@@ -159,10 +158,10 @@ function YourStack({
                 </button>
               </div>
             ))}
-
           </div>
 
-          {/* ================= REMOVE ALL ================= */}
+          {/* Remove All */}
+
           <button
             type="button"
             onClick={onRemoveAll}

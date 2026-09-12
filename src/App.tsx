@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,32 +22,34 @@ function App() {
   const [selectedTechnologies, setSelectedTechnologies] =
     useState<Technology[]>([]);
 
-  // ================= LOAD JSON =================
+  // ================= LOAD TECHNOLOGIES =================
 
   useEffect(() => {
-    fetch("/technologies.json")
-      .then((response) => {
+    const loadTechnologies = async () => {
+      try {
+        const response = await fetch("/technologies.json");
+
         console.log("Response status:", response.status);
 
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
-        return response.json();
-      })
-      .then((data: Technology[]) => {
+        const data: Technology[] = await response.json();
+
         console.log("JSON DATA:", data);
 
         setTechnologies(data);
-        setLoading(false);
-      })
-      .catch((error) => {
+      } catch (error) {
         console.error("FAILED TO LOAD TECHNOLOGIES:", error);
 
-        setLoading(false);
-
         toast.error("Failed to load technologies.");
-      });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadTechnologies();
   }, []);
 
   // ================= ADD TO STACK =================
@@ -57,10 +60,7 @@ function App() {
     );
 
     if (alreadyAdded) {
-      toast.warning(
-        `${technology.name} is already in your stack!`
-      );
-
+      toast.warning(`${technology.name} is already in your stack!`);
       return;
     }
 
@@ -69,14 +69,12 @@ function App() {
       technology,
     ]);
 
-    toast.success(
-      `${technology.name} added to your stack!`
-    );
+    toast.success(`${technology.name} added to your stack!`);
   };
 
   // ================= REMOVE ONE =================
 
-  const handleRemove = (id: number) => {
+  const handleRemove = (id: string) => {
     const technologyToRemove = selectedTechnologies.find(
       (technology) => technology.id === id
     );
@@ -135,12 +133,11 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-
-      {/* ================= NAVBAR ================= */}
+      {/* Navbar */}
 
       <Navbar />
 
-      {/* ================= TOAST ================= */}
+      {/* Toast */}
 
       <ToastContainer
         position="top-right"
@@ -150,16 +147,13 @@ function App() {
         pauseOnHover
       />
 
-      {/* ================= HERO ================= */}
+      {/* Hero */}
 
       <Hero />
 
-      {/* ================= TECHNOLOGIES ================= */}
+      {/* Technologies */}
 
-      <section
-        id="technologies"
-        className="py-16"
-      >
+      <section id="technologies" className="py-16">
         <div
           className="
             max-w-7xl
@@ -169,11 +163,9 @@ function App() {
             lg:px-8
           "
         >
-
           {/* Section Heading */}
 
           <div className="mb-10">
-
             <p className="text-sm font-semibold text-pink-500 mb-2">
               BUILD YOUR STACK
             </p>
@@ -197,10 +189,9 @@ function App() {
               add the tools you need to create your ideal
               development stack.
             </p>
-
           </div>
 
-          {/* ================= MAIN GRID ================= */}
+          {/* Main Grid */}
 
           <div
             className="
@@ -211,11 +202,9 @@ function App() {
               items-start
             "
           >
-
             {/* Technology Cards */}
 
             <div className="lg:col-span-3">
-
               <div
                 className="
                   grid
@@ -225,7 +214,6 @@ function App() {
                   gap-6
                 "
               >
-
                 {technologies.map((technology) => (
                   <TechnologyCard
                     key={technology.id}
@@ -236,32 +224,25 @@ function App() {
                     )}
                   />
                 ))}
-
               </div>
-
             </div>
 
             {/* Your Stack */}
 
             <div className="lg:col-span-1">
-
               <YourStack
                 selectedTechnologies={selectedTechnologies}
                 onRemove={handleRemove}
                 onRemoveAll={handleRemoveAll}
               />
-
             </div>
-
           </div>
-
         </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
+      {/* Footer */}
 
       <Footer />
-
     </div>
   );
 }
