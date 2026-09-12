@@ -1,0 +1,45 @@
+
+
+@import "tailwindcss";
+
+/* ========================================
+   DEV STACK GLOBAL THEME
+   ======================================== */
+
+:root {
+  --brand-gradient: linear-gradient(
+    90deg,
+    #f97316 0%,
+    #ec4899 50%,
+    #7c3aed 100%
+  );
+}
+
+/* ========================================
+   SHARED BRAND GRADIENT
+   ======================================== */
+
+.brand-gradient {
+  background: var(--brand-gradient);
+}
+
+/* Gradient text */
+.brand-gradient-text {
+  background: var(--brand-gradient);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ========================================
+   GLOBAL HTML
+   ======================================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
