@@ -10,7 +10,7 @@ The project was developed as **Assignment-5 (Dev Stack Builder Website)** with a
 
 🔗 **Live Demo:** `http://localhost:5173/`
 
-🔗 **GitHub Repository:** `Add your GitHub repository URL here`
+🔗 **GitHub Repository:** https://github.com/uzzal6090/DevStack
 
 
 ## ✨ Features
