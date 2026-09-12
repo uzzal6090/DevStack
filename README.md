@@ -8,7 +8,7 @@ The project was developed as **Assignment-5 (Dev Stack Builder Website)** with a
 
 ## 🌐 Live Website
 
-🔗 **Live Demo:** `http://localhost:5173/`
+🔗 **Live Demo:** http://localhost:5173/
 
 🔗 **GitHub Repository:** https://github.com/uzzal6090/DevStack
 
@@ -151,7 +151,7 @@ npm run dev
 Vite will provide a local development URL, usually:
 
 
-http://localhost:5173
+ http://localhost:5173/
 
 ## 🎨 Design & UI Goals
 
